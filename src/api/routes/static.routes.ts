@@ -52,4 +52,30 @@ router.get('/demo', (req: Request, res: Response) => {
   res.sendFile(demoPath);
 });
 
+/**
+ * Serve CSS files
+ */
+router.get('/css/:filename', (req: Request, res: Response) => {
+  const { filename } = req.params;
+  const cssPath = path.join(__dirname, '../../../public/css', filename);
+
+  if (!fs.existsSync(cssPath)) {
+    res.status(404).json({
+      error: 'CSS file not found',
+      code: 'NOT_FOUND',
+    });
+    return;
+  }
+
+  res.setHeader('Content-Type', 'text/css; charset=utf-8');
+
+  if (process.env.NODE_ENV === 'production') {
+    res.setHeader('Cache-Control', 'public, max-age=86400'); // 24 hours
+  } else {
+    res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+  }
+
+  res.sendFile(cssPath);
+});
+
 export default router;

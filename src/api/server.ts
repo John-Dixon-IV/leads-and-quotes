@@ -6,6 +6,7 @@ import staticRoutes from './routes/static.routes';
 import dashboardRoutes from './routes/dashboard.routes';
 import healthRoutes from './routes/health.routes';
 import adminRoutes from './routes/admin.routes';
+import marketingRoutes from './routes/marketing.routes';
 
 dotenv.config();
 
@@ -34,6 +35,18 @@ app.use('/api/v1/health', healthRoutes);
 app.use('/api/v1/widget', widgetRoutes);
 app.use('/api/v1/dashboard', dashboardRoutes);
 app.use('/api/v1/admin', adminRoutes);
+app.use('/api/v1/marketing', marketingRoutes);
+
+// Marketing landing page (served at root)
+app.get('/', (req: Request, res: Response) => {
+  const path = require('path');
+  const indexPath = path.join(process.cwd(), 'public', 'index.html');
+  res.sendFile(indexPath);
+});
+
+app.get('/admin', (req: Request, res: Response) => {
+  res.redirect('/api/v1/admin/stats');
+});
 
 // 404 handler
 app.use((req: Request, res: Response) => {

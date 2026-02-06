@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <!-- Primary Meta Tags -->
+  <title>Leads & Quotes - Stop Losing 70% of Your Leads to Ghosting</title>
+  <meta name="title" content="Leads & Quotes - Stop Losing 70% of Your Leads to Ghosting">
+  <meta name="description" content="AI-powered chat widget that captures, qualifies, and quotes your contractor leads 24/7. Recover $3,000-5,000 per month in lost revenue with automated follow-ups and instant estimates.">
+  <meta name="keywords" content="contractor leads, lead capture, AI quotes, automated follow-up, contractor CRM, lead recovery">
+  <meta name="robots" content="index, follow">
+  <meta name="language" content="English">
+  <meta name="author" content="Leads & Quotes">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://leadsandquotes.com/">
+  <meta property="og:title" content="Leads & Quotes - Stop Losing 70% of Your Leads to Ghosting">
+  <meta property="og:description" content="AI-powered chat widget that captures, qualifies, and quotes your contractor leads 24/7. Recover $3,000-5,000 per month in lost revenue.">
+  <meta property="og:image" content="https://leadsandquotes.com/og-image.jpg">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://leadsandquotes.com/">
+  <meta property="twitter:title" content="Leads & Quotes - Stop Losing 70% of Your Leads to Ghosting">
+  <meta property="twitter:description" content="AI-powered chat widget that captures, qualifies, and quotes your contractor leads 24/7. Recover $3,000-5,000 per month in lost revenue.">
+  <meta property="twitter:image" content="https://leadsandquotes.com/og-image.jpg">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Tailwind Config -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#1e3a8a',
+            secondary: '#3b82f6',
+            accent: '#10b981',
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="/css/styles.css">
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-gray-50 text-gray-900 antialiased">
+
+  <!-- Navigation -->
+  <nav class="fixed top-0 w-full bg-white/95 backdrop-blur-sm shadow-sm z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <div class="flex items-center">
+          <i data-lucide="zap" class="w-8 h-8 text-primary"></i>
+          <span class="ml-2 text-xl font-bold text-primary">Leads & Quotes</span>
+        </div>
+        <div class="hidden md:flex items-center space-x-8">
+          <a href="#features" class="text-gray-700 hover:text-primary transition">Features</a>
+          <a href="#roi-calculator" class="text-gray-700 hover:text-primary transition">ROI Calculator</a>
+          <a href="#pricing" class="text-gray-700 hover:text-primary transition">Pricing</a>
+          <a href="#demo" class="bg-primary text-white px-6 py-2 rounded-lg hover:bg-blue-900 transition font-semibold">See Demo</a>
+        </div>
+        <div class="md:hidden">
+          <button id="mobile-menu-button" class="text-gray-700 hover:text-primary">
+            <i data-lucide="menu" class="w-6 h-6"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+      <div class="px-4 py-3 space-y-2">
+        <a href="#features" class="block text-gray-700 hover:text-primary transition py-2">Features</a>
+        <a href="#roi-calculator" class="block text-gray-700 hover:text-primary transition py-2">ROI Calculator</a>
+        <a href="#pricing" class="block text-gray-700 hover:text-primary transition py-2">Pricing</a>
+        <a href="#demo" class="block bg-primary text-white px-6 py-2 rounded-lg hover:bg-blue-900 transition text-center">See Demo</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main>
+
+    <!-- Hero Section -->
+    <section class="relative pt-24 pb-20 sm:pt-32 sm:pb-28 bg-gradient-to-br from-blue-50 via-white to-blue-50 overflow-hidden">
+      <div class="absolute inset-0 bg-grid-pattern opacity-5"></div>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+        <div class="text-center max-w-4xl mx-auto">
+          <!-- Badge -->
+          <div class="inline-flex items-center px-4 py-2 bg-accent/10 text-accent rounded-full text-sm font-semibold mb-6 animate-fade-in">
+            <i data-lucide="trending-up" class="w-4 h-4 mr-2"></i>
+            Recovering $3,000-5,000/month for contractors like you
+          </div>
+
+          <!-- Main Headline -->
+          <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold text-gray-900 leading-tight mb-6 animate-slide-up">
+            Stop Losing <span class="text-primary">70% of Your Leads</span> to Ghosting
+          </h1>
+
+          <!-- Sub-headline -->
+          <p class="text-xl sm:text-2xl text-gray-600 mb-8 leading-relaxed animate-slide-up animation-delay-100">
+            Your AI Sales Associate captures leads 24/7, generates instant estimates, and recovers ghosted prospects—automatically.
+          </p>
+
+          <!-- Value Props -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-10 max-w-3xl mx-auto animate-slide-up animation-delay-200">
+            <div class="flex items-center justify-center sm:justify-start">
+              <i data-lucide="clock" class="w-5 h-5 text-accent mr-2 flex-shrink-0"></i>
+              <span class="text-gray-700 font-medium">15-min Recovery</span>
+            </div>
+            <div class="flex items-center justify-center sm:justify-start">
+              <i data-lucide="calculator" class="w-5 h-5 text-accent mr-2 flex-shrink-0"></i>
+              <span class="text-gray-700 font-medium">Math-Validated Quotes</span>
+            </div>
+            <div class="flex items-center justify-center sm:justify-start">
+              <i data-lucide="shield-check" class="w-5 h-5 text-accent mr-2 flex-shrink-0"></i>
+              <span class="text-gray-700 font-medium">71% Success Rate</span>
+            </div>
+          </div>
+
+          <!-- CTA Buttons -->
+          <div class="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up animation-delay-300">
+            <a href="#demo" class="inline-flex items-center justify-center px-8 py-4 bg-primary text-white text-lg font-semibold rounded-lg hover:bg-blue-900 transition shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+              Try Live Demo
+              <i data-lucide="arrow-right" class="w-5 h-5 ml-2"></i>
+            </a>
+            <a href="#roi-calculator" class="inline-flex items-center justify-center px-8 py-4 bg-white text-primary text-lg font-semibold rounded-lg hover:bg-gray-50 transition border-2 border-primary">
+              Calculate Your ROI
+              <i data-lucide="calculator" class="w-5 h-5 ml-2"></i>
+            </a>
+          </div>
+
+          <!-- Social Proof -->
+          <p class="mt-8 text-sm text-gray-500 animate-fade-in animation-delay-400">
+            Trusted by 50+ contractors nationwide • $125,000+ in recovered revenue
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="py-20 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+            Sound Familiar?
+          </h2>
+          <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+            You're losing thousands every month to these silent killers
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- Pain Point 1 -->
+          <div class="bg-red-50 border-2 border-red-200 rounded-xl p-8 hover:shadow-lg transition">
+            <div class="bg-red-100 w-14 h-14 rounded-full flex items-center justify-center mb-6">
+              <i data-lucide="phone-missed" class="w-7 h-7 text-red-600"></i>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">Phone Rings While You're on a Roof</h3>
+            <p class="text-gray-700 mb-4">
+              By the time you climb down, they've already called your competitor.
+            </p>
+            <p class="text-red-600 font-semibold">Lost Revenue: $2,000-4,000/month</p>
+          </div>
+
+          <!-- Pain Point 2 -->
+          <div class="bg-red-50 border-2 border-red-200 rounded-xl p-8 hover:shadow-lg transition">
+            <div class="bg-red-100 w-14 h-14 rounded-full flex items-center justify-center mb-6">
+              <i data-lucide="clock-alert" class="w-7 h-7 text-red-600"></i>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">Leads Go Cold in 5 Minutes</h3>
+            <p class="text-gray-700 mb-4">
+              You get back to them 2 hours later. They've "decided to go another direction."
+            </p>
+            <p class="text-red-600 font-semibold">Lost Revenue: $1,500-3,000/month</p>
+          </div>
+
+          <!-- Pain Point 3 -->
+          <div class="bg-red-50 border-2 border-red-200 rounded-xl p-8 hover:shadow-lg transition">
+            <div class="bg-red-100 w-14 h-14 rounded-full flex items-center justify-center mb-6">
+              <i data-lucide="ghost" class="w-7 h-7 text-red-600"></i>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">70% Ghost Before You Quote</h3>
+            <p class="text-gray-700 mb-4">
+              They ask for a quote, then disappear. You never even got their phone number.
+            </p>
+            <p class="text-red-600 font-semibold">Lost Revenue: $3,000-5,000/month</p>
+          </div>
+        </div>
+
+        <!-- Total Impact -->
+        <div class="mt-12 text-center bg-gradient-to-r from-red-100 to-red-50 rounded-2xl p-8 border-2 border-red-300">
+          <p class="text-2xl font-bold text-gray-900 mb-2">
+            Total Revenue Leaking Through the Cracks:
+          </p>
+          <p class="text-5xl font-extrabold text-red-600">
+            $6,500-12,000/month
+          </p>
+          <p class="text-gray-600 mt-3 text-lg">That's $78,000-$144,000 per year you're handing to competitors</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section id="features" class="py-20 bg-gradient-to-br from-primary/5 to-blue-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <div class="inline-flex items-center px-4 py-2 bg-accent/10 text-accent rounded-full text-sm font-semibold mb-6">
+            <i data-lucide="sparkles" class="w-4 h-4 mr-2"></i>
+            The Solution
+          </div>
+          <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+            Your New AI-Powered Sales Team
+          </h2>
+          <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+            Three specialists working 24/7 to capture, qualify, and close your leads—while you focus on the work
+          </p>
+        </div>
+
+        <!-- Feature 1: The Sales Associate -->
+        <div class="bg-white rounded-2xl shadow-xl overflow-hidden mb-8 hover:shadow-2xl transition">
+          <div class="grid grid-cols-1 lg:grid-cols-2">
+            <div class="p-10 lg:p-12 flex flex-col justify-center">
+              <div class="bg-primary/10 w-16 h-16 rounded-xl flex items-center justify-center mb-6">
+                <i data-lucide="user-check" class="w-8 h-8 text-primary"></i>
+              </div>
+              <h3 class="text-3xl font-bold text-gray-900 mb-4">1. The Sales Associate</h3>
+              <p class="text-xl text-gray-600 mb-6">
+                Intelligent Lead Intake & Qualification
+              </p>
+              <ul class="space-y-4 mb-6">
+                <li class="flex items-start">
+                  <i data-lucide="check-circle" class="w-6 h-6 text-accent mr-3 flex-shrink-0 mt-0.5"></i>
+                  <span class="text-gray-700"><strong>Never Miss a Lead:</strong> Responds in under 3 seconds, 24/7—even at 2 AM</span>
+                </li>
+                <li class="flex items-start">
+                  <i data-lucide="check-circle" class="w-6 h-6 text-accent mr-3 flex-shrink-0 mt-0.5"></i>
+                  <span class="text-gray-700"><strong>Captures Contact Info:</strong> Gets name, phone, email, and service details</span>
+                </li>
+                <li class="flex items-start">
+                  <i data-lucide="check-circle" class="w-6 h-6 text-accent mr-3 flex-shrink-0 mt-0.5"></i>
+                  <span class="text-gray-700"><strong>Filters Tire-Kickers:</strong> Qualifies leads before wasting your time</span>
+                </li>
+              </ul>
+              <div class="bg-accent/10 border-l-4 border-accent p-4 rounded">
+                <p class="text-sm text-gray-700">
+                  <strong>Result:</strong> 65-75% lead qualification rate vs. 30-40% industry average
+                </p>
+              </div>
+            </div>
+            <div class="bg-gradient-to-br from-primary to-blue-600 p-10 lg:p-12 flex items-center justify-center">
+              <div class="bg-white/10 backdrop-blur-sm rounded-xl p-8 border border-white/20">
+                <div class="space-y-4">
+                  <div class="flex items-start">
+                    <div class="bg-white rounded-lg p-3 shadow-lg">
+                      <p class="text-sm text-gray-700 font-medium">Hi! I need deck repair quotes</p>
+                    </div>
+                  </div>
+                  <div class="flex items-start justify-end">
+                    <div class="bg-primary rounded-lg p-3 shadow-lg">
+                      <p class="text-sm text-white font-medium">Hi there! I'd be happy to help with your deck repair. What's your name?</p>
+                    </div>
+                  </div>
+                  <div class="flex items-start">
+                    <div class="bg-white rounded-lg p-3 shadow-lg">
+                      <p class="text-sm text-gray-700 font-medium">Sarah Johnson</p>
+                    </div>
+                  </div>
+                  <div class="flex items-start justify-end">
+                    <div class="bg-primary rounded-lg p-3 shadow-lg">
+                      <p class="text-sm text-white font-medium">Great, Sarah! Can you tell me the dimensions of your deck?</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Feature 2: The Senior Estimator -->
+        <div class="bg-white rounded-2xl shadow-xl overflow-hidden mb-8 hover:shadow-2xl transition">
+          <div class="grid grid-cols-1 lg:grid-cols-2">
+            <div class="p-10 lg:p-12 flex flex-col justify-center order-2 lg:order-1">
+              <div class="bg-primary/10 w-16 h-16 rounded-xl flex items-center justify-center mb-6">
+                <i data-lucide="calculator" class="w-8 h-8 text-primary"></i>
+              </div>
+              <h3 class="text-3xl font-bold text-gray-900 mb-4">2. The Senior Estimator</h3>
+              <p class="text-xl text-gray-600 mb-6">
+                Math-Validated, Instant Quotes
+              </p>
+              <ul class="space-y-4 mb-6">
+                <li class="flex items-start">
+                  <i data-lucide="check-circle" class="w-6 h-6 text-accent mr-3 flex-shrink-0 mt-0.5"></i>
+                  <span class="text-gray-700"><strong>Math Sanity Engine:</strong> Catches customer errors ("10x20 = 800 sqft? Actually, that's 200 sqft")</span>
+                </li>
+                <li class="flex items-start">
+                  <i data-lucide="check-circle" class="w-6 h-6 text-accent mr-3 flex-shrink-0 mt-0.5"></i>
+                  <span class="text-gray-700"><strong>Your Pricing Rules:</strong> Uses your exact pricing ($X base + $Y/sqft)</span>
+                </li>
+                <li class="flex items-start">
+                  <i data-lucide="check-circle" class="w-6 h-6 text-accent mr-3 flex-shrink-0 mt-0.5"></i>
+                  <span class="text-gray-700"><strong>Professional Ranges:</strong> Provides low-high estimates with breakdown</span>
+                </li>
+              </ul>
+              <div class="bg-accent/10 border-l-4 border-accent p-4 rounded">
+                <p class="text-sm text-gray-700">
+                  <strong>Result:</strong> 45-55% quote-to-close rate (industry avg: 20-30%)
+                </p>
+              </div>
+            </div>
+            <div class="bg-gradient-to-br from-accent to-green-600 p-10 lg:p-12 flex items-center justify-center order-1 lg:order-2">
+              <div class="bg-white rounded-xl p-6 shadow-2xl max-w-md">
+                <div class="flex items-center mb-4">
+                  <i data-lucide="file-text" class="w-6 h-6 text-accent mr-2"></i>
+                  <h4 class="text-lg font-bold text-gray-900">Deck Repair Quote</h4>
+                </div>
+                <div class="space-y-3 mb-4">
+                  <div class="flex justify-between text-sm">
+                    <span class="text-gray-600">Dimensions:</span>
+                    <span class="font-semibold text-gray-900">10ft x 20ft (200 sqft)</span>
+                  </div>
+                  <div class="flex justify-between text-sm">
+                    <span class="text-gray-600">Base Fee:</span>
+                    <span class="font-semibold text-gray-900">$150</span>
+                  </div>
+                  <div class="flex justify-between text-sm">
+                    <span class="text-gray-600">Labor & Materials:</span>
+                    <span class="font-semibold text-gray-900">$700-850</span>
+                  </div>
+                </div>
+                <div class="border-t pt-3">
+                  <div class="flex justify-between">
+                    <span class="text-lg font-bold text-gray-900">Estimated Total:</span>
+                    <span class="text-2xl font-extrabold text-accent">$850-1,000</span>
+                  </div>
+                </div>
+                <p class="text-xs text-gray-500 mt-4 italic">
+                  *Note: Customer claimed 800 sqft, but we corrected to 200 sqft (10x20)
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Feature 3: The Ghost Buster -->
+        <div class="bg-white rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition">
+          <div class="grid grid-cols-1 lg:grid-cols-2">
+            <div class="p-10 lg:p-12 flex flex-col justify-center">
+              <div class="bg-primary/10 w-16 h-16 rounded-xl flex items-center justify-center mb-6">
+                <i data-lucide="ghost" class="w-8 h-8 text-primary"></i>
+              </div>
+              <h3 class="text-3xl font-bold text-gray-900 mb-4">3. The Ghost Buster</h3>
+              <p class="text-xl text-gray-600 mb-6">
+                Automated 15-Minute Recovery Nudges
+              </p>
+              <ul class="space-y-4 mb-6">
+                <li class="flex items-start">
+                  <i data-lucide="check-circle" class="w-6 h-6 text-accent mr-3 flex-shrink-0 mt-0.5"></i>
+                  <span class="text-gray-700"><strong>Detects Incomplete Leads:</strong> "You gave us your name but ghosted before providing a phone number"</span>
+                </li>
+                <li class="flex items-start">
+                  <i data-lucide="check-circle" class="w-6 h-6 text-accent mr-3 flex-shrink-0 mt-0.5"></i>
+                  <span class="text-gray-700"><strong>One-and-Done Nudge:</strong> Sends a polite follow-up 15 minutes later</span>
+                </li>
+                <li class="flex items-start">
+                  <i data-lucide="check-circle" class="w-6 h-6 text-accent mr-3 flex-shrink-0 mt-0.5"></i>
+                  <span class="text-gray-700"><strong>Office Hours Aware:</strong> Only sends during 8 AM - 8 PM (customer's timezone)</span>
+                </li>
+              </ul>
+              <div class="bg-accent/10 border-l-4 border-accent p-4 rounded">
+                <p class="text-sm text-gray-700">
+                  <strong>Result:</strong> 71% of ghosted leads come back and complete the form
+                </p>
+              </div>
+            </div>
+            <div class="bg-gradient-to-br from-purple-500 to-purple-700 p-10 lg:p-12 flex items-center justify-center">
+              <div class="bg-white/10 backdrop-blur-sm rounded-xl p-8 border border-white/20 max-w-md">
+                <div class="flex items-center mb-4">
+                  <div class="bg-white rounded-full p-2 mr-3">
+                    <i data-lucide="bell" class="w-5 h-5 text-purple-600"></i>
+                  </div>
+                  <p class="text-white font-semibold">15 minutes later...</p>
+                </div>
+                <div class="bg-white rounded-lg p-4 shadow-lg">
+                  <p class="text-sm text-gray-700 mb-3">
+                    <strong>Hi Sarah!</strong> I noticed you started getting a quote for your deck repair but didn't finish. I'm here if you have any questions!
+                  </p>
+                  <p class="text-sm text-gray-700 mb-3">
+                    Quick reminder: We estimated <strong>$850-1,000</strong> for your 10x20 deck repair.
+                  </p>
+                  <p class="text-sm text-gray-700">
+                    Ready to move forward? Just let me know your phone number and I'll have someone reach out today! 📞
+                  </p>
+                </div>
+                <div class="mt-4 text-center">
+                  <p class="text-white text-sm font-medium">71% Response Rate</p>
+                  <div class="bg-white/20 rounded-full h-2 mt-2">
+                    <div class="bg-accent rounded-full h-2 w-[71%]"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ROI Calculator -->
+    <section id="roi-calculator" class="py-20 bg-white">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+            Calculate Your Revenue Recovery
+          </h2>
+          <p class="text-xl text-gray-600">
+            See exactly how much money you're leaving on the table
+          </p>
+        </div>
+
+        <div class="bg-gradient-to-br from-primary to-blue-600 rounded-2xl p-8 sm:p-12 shadow-2xl">
+          <!-- Input: Average Job Value -->
+          <div class="mb-8">
+            <label class="block text-white font-semibold mb-3 text-lg">
+              Average Job Value
+            </label>
+            <div class="flex items-center">
+              <span class="text-white text-2xl font-bold mr-4">$</span>
+              <input
+                type="range"
+                id="avg-job-value"
+                min="500"
+                max="10000"
+                step="100"
+                value="2000"
+                class="flex-1 h-3 bg-white/20 rounded-lg appearance-none cursor-pointer slider"
+              >
+              <span class="text-white text-2xl font-bold ml-4 min-w-[120px] text-right" id="avg-job-value-display">$2,000</span>
+            </div>
+          </div>
+
+          <!-- Input: Leads Per Month -->
+          <div class="mb-8">
+            <label class="block text-white font-semibold mb-3 text-lg">
+              Website Visitors Per Month
+            </label>
+            <div class="flex items-center">
+              <i data-lucide="users" class="w-6 h-6 text-white mr-4"></i>
+              <input
+                type="range"
+                id="leads-per-month"
+                min="50"
+                max="1000"
+                step="10"
+                value="200"
+                class="flex-1 h-3 bg-white/20 rounded-lg appearance-none cursor-pointer slider"
+              >
+              <span class="text-white text-2xl font-bold ml-4 min-w-[120px] text-right" id="leads-per-month-display">200</span>
+            </div>
+          </div>
+
+          <!-- Calculation Display -->
+          <div class="bg-white rounded-xl p-8 mt-8">
+            <div class="space-y-4">
+              <div class="flex justify-between items-center pb-3 border-b">
+                <span class="text-gray-600">Leads Currently Ghosting (70%):</span>
+                <span class="text-xl font-bold text-gray-900" id="ghosted-leads">140</span>
+              </div>
+              <div class="flex justify-between items-center pb-3 border-b">
+                <span class="text-gray-600">Recoverable with Ghost Buster (71%):</span>
+                <span class="text-xl font-bold text-accent" id="recovered-leads">99</span>
+              </div>
+              <div class="flex justify-between items-center pb-3 border-b">
+                <span class="text-gray-600">Average Close Rate (40%):</span>
+                <span class="text-xl font-bold text-accent" id="closed-deals">40</span>
+              </div>
+              <div class="flex justify-between items-center pt-4">
+                <span class="text-2xl font-bold text-gray-900">Monthly Revenue Recovered:</span>
+                <span class="text-4xl font-extrabold text-accent" id="monthly-revenue">$79,200</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-xl font-semibold text-gray-700">Annual Revenue Recovered:</span>
+                <span class="text-3xl font-extrabold text-primary" id="annual-revenue">$950,400</span>
+              </div>
+            </div>
+
+            <div class="mt-6 bg-accent/10 border-l-4 border-accent p-4 rounded">
+              <p class="text-sm text-gray-700">
+                <strong>Platform Cost:</strong> $200/month ($2,400/year)
+              </p>
+              <p class="text-sm text-gray-700 mt-1">
+                <strong>ROI:</strong> <span class="text-2xl font-bold text-accent" id="roi">39,516%</span>
+              </p>
+            </div>
+          </div>
+
+          <!-- CTA -->
+          <div class="text-center mt-8">
+            <a href="#pricing" class="inline-block bg-white text-primary px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-100 transition shadow-lg">
+              Start Recovering Revenue Today
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Live Demo Section -->
+    <section id="demo" class="py-20 bg-gradient-to-br from-gray-900 to-gray-800 text-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <div class="inline-flex items-center px-4 py-2 bg-accent/20 text-accent rounded-full text-sm font-semibold mb-6">
+            <i data-lucide="play-circle" class="w-4 h-4 mr-2"></i>
+            Try It Now
+          </div>
+          <h2 class="text-3xl sm:text-4xl font-bold mb-4">
+            See It In Action
+          </h2>
+          <p class="text-xl text-gray-300 max-w-2xl mx-auto">
+            Click the chat widget in the bottom-right corner and ask it anything about Leads & Quotes
+          </p>
+        </div>
+
+        <div class="max-w-3xl mx-auto">
+          <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20">
+            <div class="flex items-start mb-6">
+              <div class="bg-accent rounded-full p-3 mr-4">
+                <i data-lucide="message-circle" class="w-6 h-6 text-white"></i>
+              </div>
+              <div>
+                <h3 class="text-xl font-bold mb-2">Try These Questions:</h3>
+                <ul class="space-y-2 text-gray-300">
+                  <li class="flex items-start">
+                    <i data-lucide="chevron-right" class="w-5 h-5 text-accent mr-2 flex-shrink-0 mt-0.5"></i>
+                    "How much does Leads & Quotes cost?"
+                  </li>
+                  <li class="flex items-start">
+                    <i data-lucide="chevron-right" class="w-5 h-5 text-accent mr-2 flex-shrink-0 mt-0.5"></i>
+                    "What's the Ghost Buster feature?"
+                  </li>
+                  <li class="flex items-start">
+                    <i data-lucide="chevron-right" class="w-5 h-5 text-accent mr-2 flex-shrink-0 mt-0.5"></i>
+                    "Can I customize the pricing rules?"
+                  </li>
+                  <li class="flex items-start">
+                    <i data-lucide="chevron-right" class="w-5 h-5 text-accent mr-2 flex-shrink-0 mt-0.5"></i>
+                    "How do I get started?"
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="bg-primary/20 rounded-lg p-6 border border-primary/30">
+              <div class="flex items-center mb-3">
+                <i data-lucide="zap" class="w-5 h-5 text-accent mr-2"></i>
+                <p class="text-sm font-semibold">This is the same AI your customers will interact with</p>
+              </div>
+              <p class="text-sm text-gray-300">
+                Our widget is powered by Claude Sonnet 4.5, the same AI that handles lead qualification, quote generation, and follow-ups for your business.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-20 bg-white">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+            Early Adopter Pricing
+          </h2>
+          <p class="text-xl text-gray-600">
+            Lock in this rate for life—$200/month, billed monthly
+          </p>
+        </div>
+
+        <div class="bg-gradient-to-br from-primary to-blue-600 rounded-2xl shadow-2xl overflow-hidden transform hover:scale-105 transition duration-300">
+          <div class="p-8 sm:p-12 text-white">
+            <div class="flex items-center justify-between mb-6">
+              <h3 class="text-3xl font-bold">Professional</h3>
+              <div class="bg-accent px-4 py-2 rounded-full text-sm font-bold">
+                Early Adopter
+              </div>
+            </div>
+
+            <div class="mb-8">
+              <span class="text-5xl sm:text-6xl font-extrabold">$200</span>
+              <span class="text-2xl text-white/80">/month</span>
+            </div>
+
+            <p class="text-xl mb-8 text-white/90">
+              Everything you need to capture, qualify, and close more leads
+            </p>
+
+            <ul class="space-y-4 mb-10">
+              <li class="flex items-start">
+                <i data-lucide="check" class="w-6 h-6 text-accent mr-3 flex-shrink-0 mt-0.5"></i>
+                <span class="text-lg"><strong>Unlimited leads</strong> captured & qualified</span>
+              </li>
+              <li class="flex items-start">
+                <i data-lucide="check" class="w-6 h-6 text-accent mr-3 flex-shrink-0 mt-0.5"></i>
+                <span class="text-lg"><strong>Ghost Buster</strong> automated follow-ups</span>
+              </li>
+              <li class="flex items-start">
+                <i data-lucide="check" class="w-6 h-6 text-accent mr-3 flex-shrink-0 mt-0.5"></i>
+                <span class="text-lg"><strong>Math-validated</strong> instant quotes</span>
+              </li>
+              <li class="flex items-start">
+                <i data-lucide="check" class="w-6 h-6 text-accent mr-3 flex-shrink-0 mt-0.5"></i>
+                <span class="text-lg"><strong>Hot lead alerts</strong> via SMS/Email</span>
+              </li>
+              <li class="flex items-start">
+                <i data-lucide="check" class="w-6 h-6 text-accent mr-3 flex-shrink-0 mt-0.5"></i>
+                <span class="text-lg"><strong>Weekly performance</strong> digest</span>
+              </li>
+              <li class="flex items-start">
+                <i data-lucide="check" class="w-6 h-6 text-accent mr-3 flex-shrink-0 mt-0.5"></i>
+                <span class="text-lg"><strong>Custom pricing rules</strong> per service</span>
+              </li>
+              <li class="flex items-start">
+                <i data-lucide="check" class="w-6 h-6 text-accent mr-3 flex-shrink-0 mt-0.5"></i>
+                <span class="text-lg"><strong>Timezone-aware</strong> office hours</span>
+              </li>
+              <li class="flex items-start">
+                <i data-lucide="check" class="w-6 h-6 text-accent mr-3 flex-shrink-0 mt-0.5"></i>
+                <span class="text-lg"><strong>QuickBooks integration</strong> ready</span>
+              </li>
+            </ul>
+
+            <a href="#contact" class="block w-full bg-accent text-white text-center px-8 py-4 rounded-lg text-xl font-bold hover:bg-green-600 transition shadow-lg">
+              Get Started Today
+            </a>
+
+            <p class="text-center text-sm text-white/70 mt-6">
+              No setup fees • No contracts • Cancel anytime
+            </p>
+          </div>
+
+          <div class="bg-white/10 backdrop-blur-sm p-6 border-t border-white/20">
+            <div class="flex items-center justify-center text-sm">
+              <i data-lucide="shield-check" class="w-5 h-5 text-accent mr-2"></i>
+              <span>30-day money-back guarantee</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cost Comparison -->
+        <div class="mt-12 bg-gray-50 rounded-xl p-8">
+          <h4 class="text-xl font-bold text-gray-900 mb-6 text-center">
+            What Else Could $200/Month Get You?
+          </h4>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+            <div class="text-center">
+              <p class="text-gray-600 mb-2">Part-Time Receptionist</p>
+              <p class="text-3xl font-bold text-gray-400">$1,200/mo</p>
+              <p class="text-sm text-gray-500 mt-1">Works 30 hrs/week</p>
+            </div>
+            <div class="text-center">
+              <p class="text-gray-600 mb-2">Lead Generation Service</p>
+              <p class="text-3xl font-bold text-gray-400">$500-2,000/mo</p>
+              <p class="text-sm text-gray-500 mt-1">Per lead costs add up</p>
+            </div>
+            <div class="text-center">
+              <p class="text-gray-600 mb-2 font-bold">Leads & Quotes</p>
+              <p class="text-3xl font-bold text-accent">$200/mo</p>
+              <p class="text-sm text-accent font-semibold mt-1">24/7, unlimited leads</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact / Lead Capture -->
+    <section id="contact" class="py-20 bg-gradient-to-br from-primary to-blue-600 text-white">
+      <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl sm:text-4xl font-bold mb-4">
+            Ready to Stop Losing Leads?
+          </h2>
+          <p class="text-xl text-white/90">
+            Get set up in under 10 minutes. Start recovering revenue today.
+          </p>
+        </div>
+
+        <div class="bg-white rounded-2xl p-8 sm:p-10 shadow-2xl">
+          <form id="lead-capture-form" class="space-y-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div>
+                <label for="contact-name" class="block text-sm font-semibold text-gray-700 mb-2">
+                  Your Name *
+                </label>
+                <input
+                  type="text"
+                  id="contact-name"
+                  name="name"
+                  required
+                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-gray-900"
+                  placeholder="John Smith"
+                >
+              </div>
+              <div>
+                <label for="contact-company" class="block text-sm font-semibold text-gray-700 mb-2">
+                  Business Name *
+                </label>
+                <input
+                  type="text"
+                  id="contact-company"
+                  name="company"
+                  required
+                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-gray-900"
+                  placeholder="Joe's Deck Repair"
+                >
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div>
+                <label for="contact-email" class="block text-sm font-semibold text-gray-700 mb-2">
+                  Email *
+                </label>
+                <input
+                  type="email"
+                  id="contact-email"
+                  name="email"
+                  required
+                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-gray-900"
+                  placeholder="john@joesdecks.com"
+                >
+              </div>
+              <div>
+                <label for="contact-phone" class="block text-sm font-semibold text-gray-700 mb-2">
+                  Phone *
+                </label>
+                <input
+                  type="tel"
+                  id="contact-phone"
+                  name="phone"
+                  required
+                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-gray-900"
+                  placeholder="512-555-1234"
+                >
+              </div>
+            </div>
+
+            <div>
+              <label for="contact-services" class="block text-sm font-semibold text-gray-700 mb-2">
+                Services You Offer
+              </label>
+              <input
+                type="text"
+                id="contact-services"
+                name="services"
+                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-gray-900"
+                placeholder="Deck repair, fence installation, etc."
+              >
+            </div>
+
+            <div>
+              <label for="contact-website" class="block text-sm font-semibold text-gray-700 mb-2">
+                Website (if you have one)
+              </label>
+              <input
+                type="url"
+                id="contact-website"
+                name="website"
+                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-gray-900"
+                placeholder="https://joesdecks.com"
+              >
+            </div>
+
+            <button
+              type="submit"
+              class="w-full bg-primary text-white px-8 py-4 rounded-lg text-lg font-bold hover:bg-blue-900 transition shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+            >
+              Get Started Now
+              <i data-lucide="arrow-right" class="w-5 h-5 ml-2 inline"></i>
+            </button>
+
+            <p class="text-xs text-gray-500 text-center">
+              By submitting, you agree to receive product updates and offers. Unsubscribe anytime.
+            </p>
+          </form>
+
+          <div id="form-success" class="hidden text-center py-8">
+            <div class="bg-accent/10 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4">
+              <i data-lucide="check-circle" class="w-12 h-12 text-accent"></i>
+            </div>
+            <h3 class="text-2xl font-bold text-gray-900 mb-2">Thanks! We'll be in touch soon.</h3>
+            <p class="text-gray-600">Check your email for setup instructions.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-gray-300 py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+        <div>
+          <div class="flex items-center mb-4">
+            <i data-lucide="zap" class="w-6 h-6 text-accent"></i>
+            <span class="ml-2 text-xl font-bold text-white">Leads & Quotes</span>
+          </div>
+          <p class="text-sm text-gray-400">
+            AI-powered lead capture and quote generation for contractors.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="text-white font-semibold mb-4">Product</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="#features" class="hover:text-white transition">Features</a></li>
+            <li><a href="#pricing" class="hover:text-white transition">Pricing</a></li>
+            <li><a href="#demo" class="hover:text-white transition">Demo</a></li>
+            <li><a href="#roi-calculator" class="hover:text-white transition">ROI Calculator</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-white font-semibold mb-4">Resources</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="/docs" class="hover:text-white transition">Documentation</a></li>
+            <li><a href="/api/v1/health" class="hover:text-white transition">API Status</a></li>
+            <li><a href="#contact" class="hover:text-white transition">Support</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-white font-semibold mb-4">Company</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="/admin" class="hover:text-white transition">Admin Login</a></li>
+            <li><a href="#contact" class="hover:text-white transition">Contact</a></li>
+            <li><a href="/privacy" class="hover:text-white transition">Privacy Policy</a></li>
+            <li><a href="/terms" class="hover:text-white transition">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="border-t border-gray-800 pt-8 text-center text-sm">
+        <p>&copy; 2026 Leads & Quotes. All rights reserved.</p>
+        <p class="mt-2 text-gray-500">Built with Claude Sonnet 4.5 & Haiku 4.5</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Initialize Lucide Icons -->
+  <script>
+    lucide.createIcons();
+  </script>
+
+  <!-- ROI Calculator Logic -->
+  <script>
+    const avgJobValueSlider = document.getElementById('avg-job-value');
+    const leadsPerMonthSlider = document.getElementById('leads-per-month');
+    const avgJobValueDisplay = document.getElementById('avg-job-value-display');
+    const leadsPerMonthDisplay = document.getElementById('leads-per-month-display');
+
+    function calculateROI() {
+      const avgJobValue = parseInt(avgJobValueSlider.value);
+      const leadsPerMonth = parseInt(leadsPerMonthSlider.value);
+
+      // Update displays
+      avgJobValueDisplay.textContent = '$' + avgJobValue.toLocaleString();
+      leadsPerMonthDisplay.textContent = leadsPerMonth.toLocaleString();
+
+      // Calculate metrics
+      const ghostedLeads = Math.round(leadsPerMonth * 0.70);
+      const recoveredLeads = Math.round(ghostedLeads * 0.71);
+      const closedDeals = Math.round(recoveredLeads * 0.40);
+      const monthlyRevenue = closedDeals * avgJobValue;
+      const annualRevenue = monthlyRevenue * 12;
+      const platformCost = 2400; // $200/month * 12
+      const roi = ((annualRevenue - platformCost) / platformCost * 100).toFixed(0);
+
+      // Update DOM
+      document.getElementById('ghosted-leads').textContent = ghostedLeads;
+      document.getElementById('recovered-leads').textContent = recoveredLeads;
+      document.getElementById('closed-deals').textContent = closedDeals;
+      document.getElementById('monthly-revenue').textContent = '$' + monthlyRevenue.toLocaleString();
+      document.getElementById('annual-revenue').textContent = '$' + annualRevenue.toLocaleString();
+      document.getElementById('roi').textContent = roi.toLocaleString() + '%';
+    }
+
+    avgJobValueSlider.addEventListener('input', calculateROI);
+    leadsPerMonthSlider.addEventListener('input', calculateROI);
+
+    // Initialize
+    calculateROI();
+  </script>
+
+  <!-- Lead Capture Form -->
+  <script>
+    const leadForm = document.getElementById('lead-capture-form');
+    const formSuccess = document.getElementById('form-success');
+
+    leadForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const formData = {
+        name: document.getElementById('contact-name').value,
+        company: document.getElementById('contact-company').value,
+        email: document.getElementById('contact-email').value,
+        phone: document.getElementById('contact-phone').value,
+        services: document.getElementById('contact-services').value,
+        website: document.getElementById('contact-website').value,
+      };
+
+      try {
+        const response = await fetch('/api/v1/marketing/lead-capture', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData),
+        });
+
+        if (response.ok) {
+          leadForm.classList.add('hidden');
+          formSuccess.classList.remove('hidden');
+          lucide.createIcons();
+        } else {
+          alert('Something went wrong. Please try again or email us directly.');
+        }
+      } catch (error) {
+        console.error('Error submitting form:', error);
+        alert('Something went wrong. Please try again or email us directly.');
+      }
+    });
+  </script>
+
+  <!-- Mobile Menu Toggle -->
+  <script>
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    mobileMenuButton.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+  </script>
+
+  <!-- Load Our Own Widget (Demo) -->
+  <script src="/widget.js"></script>
+  <script>
+    window.initLeadsWidget({
+      apiKey: 'demo-key-for-saas-sales',
+      apiBaseUrl: window.location.origin,
+      position: 'bottom-right',
+      primaryColor: '#1e3a8a',
+      greeting: 'Hi! Got questions about Leads & Quotes? Ask away! 👋',
+      systemPrompt: 'You are a helpful sales assistant for Leads & Quotes, a SaaS platform for contractors. Answer questions about pricing ($200/month), features (Ghost Buster, instant quotes, lead capture), ROI, and how to get started. Be friendly and professional.',
+    });
+  </script>
+
+</body>
+</html>
