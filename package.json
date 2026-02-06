@@ -13,7 +13,14 @@
     "test:estimate": "tsx tests/estimate.test.ts",
     "test:hot-lead": "tsx src/scripts/test-hot-lead.ts",
     "test:digest": "tsx src/scripts/test-weekly-digest.ts",
-    "test:e2e": "tsx tests/e2e_scenarios.test.ts"
+    "test:e2e": "tsx tests/e2e_scenarios.test.ts",
+    "verify:all": "tsx scripts/run-all-verifications.ts",
+    "verify:all:skip-docker": "tsx scripts/run-all-verifications.ts --skip-docker",
+    "verify:docker": "tsx scripts/verify-docker.ts",
+    "verify:ghost-buster": "tsx scripts/simulate-ghost-buster.ts",
+    "verify:math": "tsx scripts/verify-math-sanity.ts",
+    "verify:admin": "tsx scripts/verify-admin-stats.ts",
+    "onboard": "tsx scripts/onboard-customer.ts"
   },
   "keywords": [],
   "author": "",
