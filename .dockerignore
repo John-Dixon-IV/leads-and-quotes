@@ -1,0 +1,55 @@
+# Dependencies
+node_modules
+npm-debug.log
+yarn-error.log
+
+# Build artifacts
+dist
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Git
+.git
+.gitignore
+
+# Documentation
+*.md
+docs/
+
+# Tests
+tests/
+coverage/
+*.test.ts
+*.spec.ts
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+
+# Claude Code
+.claude/
+
+# Project instructions
+skill.md
+
+# CI/CD
+.github/
+
+# Docker
+Dockerfile
+docker-compose*.yml
+.dockerignore

@@ -12,7 +12,8 @@
     "get-key": "tsx src/scripts/update-seed-with-key.ts",
     "test:estimate": "tsx tests/estimate.test.ts",
     "test:hot-lead": "tsx src/scripts/test-hot-lead.ts",
-    "test:digest": "tsx src/scripts/test-weekly-digest.ts"
+    "test:digest": "tsx src/scripts/test-weekly-digest.ts",
+    "test:e2e": "tsx tests/e2e_scenarios.test.ts"
   },
   "keywords": [],
   "author": "",

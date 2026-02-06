@@ -4,6 +4,8 @@ import * as dotenv from 'dotenv';
 import widgetRoutes from './routes/widget.routes';
 import staticRoutes from './routes/static.routes';
 import dashboardRoutes from './routes/dashboard.routes';
+import healthRoutes from './routes/health.routes';
+import adminRoutes from './routes/admin.routes';
 
 dotenv.config();
 
@@ -24,17 +26,14 @@ app.use((req: Request, res: Response, next) => {
   next();
 });
 
-// Health check
-app.get('/health', (req: Request, res: Response) => {
-  res.status(200).json({ status: 'ok', timestamp: new Date().toISOString() });
-});
-
 // Static file routes (widget.js, demo.html)
 app.use('/', staticRoutes);
 
 // API routes
+app.use('/api/v1/health', healthRoutes);
 app.use('/api/v1/widget', widgetRoutes);
 app.use('/api/v1/dashboard', dashboardRoutes);
+app.use('/api/v1/admin', adminRoutes);
 
 // 404 handler
 app.use((req: Request, res: Response) => {

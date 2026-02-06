@@ -10,7 +10,7 @@ import { Lead, Customer } from '../types/domain.types';
  *
  * RULES:
  * 1. One-and-Done: Only one automated nudge per lead
- * 2. Office Hours: Only send between 7 AM - 9 PM local time
+ * 2. Office Hours: Only send between 8 AM - 8 PM local time
  * 3. Stop Command: Never send if user said "nevermind"
  * 4. Time Window: 15-30 minutes after last activity
  */

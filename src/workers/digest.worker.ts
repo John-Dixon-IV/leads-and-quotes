@@ -1,6 +1,7 @@
 import cron from 'node-cron';
 import db from '../db/client';
 import reportService from '../services/report.service';
+import followUpService from '../services/followup.service';
 
 /**
  * Weekly Digest Worker
@@ -58,6 +59,15 @@ export class DigestWorker {
    */
   private async sendDigestToCustomer(customer: any): Promise<void> {
     try {
+      // Check office hours (8 AM - 8 PM in customer's timezone)
+      const timezone = customer.timezone || 'America/Chicago';
+      if (!followUpService.isOfficeHours(timezone)) {
+        console.log(
+          `[DigestWorker] Skipping ${customer.company_name} - outside office hours in ${timezone}`
+        );
+        return;
+      }
+
       // Check if digest was already sent this week
       const lastSent = await this.getLastDigestSent(customer.customer_id);
       if (lastSent && this.isThisWeek(lastSent)) {

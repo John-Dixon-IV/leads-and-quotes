@@ -80,6 +80,62 @@ export class NotificationService {
   }
 
   /**
+   * Send homeowner confirmation email after quote generation
+   */
+  async sendHomeownerConfirmation(params: {
+    customerId: string;
+    leadId: string;
+    visitorName: string;
+    visitorEmail: string;
+    serviceType: string;
+    estimatedRange: string;
+    businessName: string;
+    businessPhone: string;
+  }): Promise<void> {
+    try {
+      const { visitorName, visitorEmail, serviceType, estimatedRange, businessName, businessPhone } = params;
+
+      // Compose email
+      const subject = `Your ${serviceType} Estimate`;
+      const body = `Hi ${visitorName},
+
+Your estimate for ${serviceType} is ready!
+
+Estimated Cost: ${estimatedRange}
+
+${businessName} will contact you shortly at ${visitorEmail}.
+
+Questions? Call us at ${businessPhone}.
+
+Thank you!`;
+
+      console.log(`[NotificationService] Sending homeowner confirmation to ${visitorEmail}`);
+
+      // Send email to visitor
+      await this.sendEmail(
+        params.customerId,
+        params.leadId,
+        visitorEmail,
+        subject,
+        body
+      );
+
+      // Update notification type to homeowner_confirmation
+      await db.query(
+        `UPDATE notifications
+         SET notification_type = 'homeowner_confirmation'
+         WHERE customer_id = $1 AND lead_id = $2 AND recipient = $3
+         ORDER BY created_at DESC LIMIT 1`,
+        [params.customerId, params.leadId, visitorEmail]
+      );
+
+      console.log(`[NotificationService] Homeowner confirmation sent to ${visitorEmail}`);
+    } catch (error) {
+      console.error('[NotificationService] Failed to send homeowner confirmation:', error);
+    }
+  }
+
+  /**
    * Generate alert message using Haiku (160 char SMS + email)
    */
   private async generateAlertMessage(alert: HotLeadAlert): Promise<AlertMessage> {

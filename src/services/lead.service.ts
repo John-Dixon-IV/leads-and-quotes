@@ -3,6 +3,11 @@ import claudeService from './claude.service';
 import notificationService from './notification.service';
 import { Customer, Lead, Message } from '../types/domain.types';
 import { WidgetMessageRequest, WidgetMessageResponse } from '../types/api.types';
+import {
+  checkPromptInjection,
+  sanitizeMessage,
+  validateLeadOwnership,
+} from '../utils/security';
 
 const MAX_MESSAGES_PER_SESSION = 10;
 const CONFIDENCE_THRESHOLD = 0.6;
@@ -16,29 +21,45 @@ export class LeadService {
     customer: Customer,
     request: WidgetMessageRequest
   ): Promise<WidgetMessageResponse> {
-    // 1. Get or create lead for this session
+    // 1. SECURITY: Check for prompt injection
+    const securityCheck = checkPromptInjection(request.message);
+    if (!securityCheck.passed) {
+      console.warn(`[Security] Blocked message: ${securityCheck.reason}`);
+      return this.buildSecurityBlockedResponse();
+    }
+
+    // 2. Sanitize message
+    const sanitizedMessage = sanitizeMessage(request.message);
+
+    // 3. Get or create lead for this session
     const lead = await this.getOrCreateLead(customer, request);
 
-    // 2. Check message count limit
+    // 4. SECURITY: Multi-tenant validation
+    if (!validateLeadOwnership(lead.customer_id, customer.customer_id)) {
+      console.error(`[Security] Cross-tenant access attempt: lead ${lead.lead_id}`);
+      throw new Error('Unauthorized access');
+    }
+
+    // 5. Check message count limit
     if (lead.message_count >= MAX_MESSAGES_PER_SESSION) {
       return this.buildMaxMessagesResponse(lead);
     }
 
-    // 3. Check if lead is already qualified (stop AI)
+    // 6. Check if lead is already qualified (stop AI)
     if (lead.is_qualified) {
       return this.buildAlreadyQualifiedResponse(lead);
     }
 
-    // 4. Store visitor message
-    await this.storeMessage(lead.lead_id, 'visitor', request.message, null, null);
+    // 7. Store visitor message (sanitized)
+    await this.storeMessage(lead.lead_id, 'visitor', sanitizedMessage, null, null);
 
-    // 5. Increment message count
+    // 8. Increment message count
     await this.incrementMessageCount(lead.lead_id);
 
-    // 6. Get conversation history
+    // 9. Get conversation history
     const conversationHistory = await this.getConversationHistory(lead.lead_id);
 
-    // 7. Call Claude for classification
+    // 10. Call Claude for classification (use sanitized message)
     const classificationResult = await claudeService.classifyLead({
       customerContext: {
         services: customer.business_info.services || [],
@@ -46,7 +67,7 @@ export class LeadService {
         systemPrompt: customer.ai_prompts.system_prompt || '',
       },
       conversationHistory,
-      currentMessage: request.message,
+      currentMessage: sanitizedMessage,
       visitorInfo: {
         name: request.visitor?.name || lead.visitor_name || undefined,
         email: request.visitor?.email || lead.visitor_email || undefined,
@@ -69,6 +90,55 @@ export class LeadService {
     let quoteResult = null;
     let finalReplyMessage = classificationResult.reply_message;
     let conversationEnded = false;
+
+    // PARTNER REFERRAL: Check if out-of-area and partner exists
+    const isOutOfArea = classificationResult.classification.is_out_of_area || false;
+    if (isOutOfArea && customer.business_info.partner_referral_info) {
+      const partnerInfo = customer.business_info.partner_referral_info;
+
+      // Mark lead as out-of-area
+      await db.query(
+        `UPDATE leads SET is_out_of_area = true WHERE lead_id = $1`,
+        [lead.lead_id]
+      );
+
+      // Generate partner referral message
+      const referralMessage = this.buildPartnerReferralMessage(
+        classificationResult.classification,
+        partnerInfo,
+        request.visitor?.name || lead.visitor_name
+      );
+
+      finalReplyMessage = referralMessage;
+      conversationEnded = false; // Keep conversation open for user response
+
+      // Update classification to reflect referral
+      await this.updateLeadClassification(
+        lead.lead_id,
+        { ...classificationResult.classification, next_action: 'partner_referral' },
+        false
+      );
+
+      // Store AI response
+      await this.storeMessage(
+        lead.lead_id,
+        'ai',
+        finalReplyMessage,
+        'claude-haiku-4-5-20251001',
+        classificationResult.classification.confidence
+      );
+
+      await this.incrementMessageCount(lead.lead_id);
+
+      return {
+        lead_id: lead.lead_id,
+        classification: { ...classificationResult.classification, next_action: 'partner_referral' },
+        quote: null,
+        requires_followup: true,
+        reply_message: finalReplyMessage,
+        conversation_ended: false,
+      };
+    }
 
     if (shouldGenerateQuote) {
       // 10. Generate quote using Sonnet
@@ -340,6 +410,118 @@ export class LeadService {
         "We've already captured your request! Our team will be in touch soon.",
       conversation_ended: true,
     };
+  }
+
+  /**
+   * Build response when security check fails
+   */
+  private buildSecurityBlockedResponse(): WidgetMessageResponse {
+    return {
+      lead_id: '',
+      classification: {
+        service_type: 'junk',
+        category: 'Junk',
+        urgency_score: 0,
+        confidence: 1.0,
+        next_action: 'close',
+      } as any,
+      quote: null,
+      requires_followup: false,
+      reply_message:
+        "I'm sorry, but I can only help with questions about our services. If you have a genuine inquiry, please rephrase your message.",
+      conversation_ended: true,
+    };
+  }
+
+  /**
+   * Build partner referral message for out-of-area leads
+   */
+  private buildPartnerReferralMessage(
+    classification: any,
+    partnerInfo: any,
+    visitorName: string | null | undefined
+  ): string {
+    const location = classification.location || 'that area';
+    const partnerName = partnerInfo.partner_name || 'a trusted partner';
+    const serviceName = classification.service_type?.replace(/_/g, ' ') || 'this service';
+    const greeting = visitorName ? `Hi ${visitorName}! ` : 'Hi! ';
+
+    return (
+      `${greeting}Unfortunately, we don't currently service ${location}, but I have some good news! ` +
+      `Our partner, ${partnerName}, provides excellent ${serviceName} in your area. ` +
+      `Would you like me to send them your contact information so they can reach out with a quote? ` +
+      `They're trusted professionals we work with regularly.`
+    );
+  }
+
+  /**
+   * Send referral to partner (called when visitor confirms)
+   */
+  async sendPartnerReferral(
+    leadId: string,
+    customerId: string
+  ): Promise<{ success: boolean; message: string }> {
+    try {
+      // Get lead and customer info
+      const lead = await db.query<any>(
+        `SELECT * FROM leads WHERE lead_id = $1 AND customer_id = $2`,
+        [leadId, customerId]
+      );
+
+      if (!lead[0]) {
+        return { success: false, message: 'Lead not found' };
+      }
+
+      const customer = await db.query<any>(
+        `SELECT * FROM customers WHERE customer_id = $1`,
+        [customerId]
+      );
+
+      if (!customer[0]) {
+        return { success: false, message: 'Customer not found' };
+      }
+
+      const partnerInfo = customer[0].business_info?.partner_referral_info;
+
+      if (!partnerInfo) {
+        return { success: false, message: 'Partner referral info not configured' };
+      }
+
+      // Mark referral as sent
+      await db.query(
+        `UPDATE leads
+         SET referral_sent = true,
+             referral_partner_name = $1,
+             referral_sent_at = NOW()
+         WHERE lead_id = $2`,
+        [partnerInfo.partner_name, leadId]
+      );
+
+      // Log notification
+      await db.query(
+        `INSERT INTO notifications (customer_id, lead_id, notification_type, channel, recipient, content, status)
+         VALUES ($1, $2, 'partner_referral', 'email', $3, $4, 'sent')`,
+        [
+          customerId,
+          leadId,
+          partnerInfo.partner_email || partnerInfo.partner_phone,
+          `Referral for ${lead[0].visitor_name || 'visitor'} - ${lead[0].classification?.service_type}`,
+        ]
+      );
+
+      console.log(`[LeadService] Partner referral sent for lead ${leadId} to ${partnerInfo.partner_name}`);
+
+      return {
+        success: true,
+        message: `Perfect! I've sent your information to ${partnerInfo.partner_name}. They'll reach out to you soon!`,
+      };
+    } catch (error) {
+      console.error('[LeadService] Failed to send partner referral:', error);
+      return {
+        success: false,
+        message: 'Sorry, there was an error sending the referral. Please try again.',
+      };
+    }
   }
 
   /**

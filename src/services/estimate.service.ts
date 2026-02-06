@@ -1,5 +1,6 @@
 import Anthropic from '@anthropic-ai/sdk';
 import * as dotenv from 'dotenv';
+import { validateDimensions, generateCorrectionMessage } from '../utils/mathValidation';
 
 dotenv.config();
 
@@ -36,6 +37,7 @@ interface EstimateRequest {
       unit: string;
     };
     notes?: string;
+    conversation_text?: string; // For math validation
   };
 }
 
@@ -43,6 +45,8 @@ interface EstimateResponse {
   quote: {
     estimated_range: string;
     is_calculated: boolean;
+    math_correction_flag?: boolean;
+    corrected_area?: number;
     breakdown: {
       base_fee: number;
       estimated_labor_low: number;
@@ -65,7 +69,29 @@ export class EstimateService {
    * Generate price estimate using Claude Sonnet
    */
   async generateEstimate(request: EstimateRequest): Promise<EstimateResponse> {
-    const systemPrompt = this.buildEstimateSystemPrompt();
+    // MATH SANITY CHECK: Validate dimensions if conversation text provided
+    let mathCorrection = null;
+    if (request.lead_data.conversation_text) {
+      const dimensionInfo = validateDimensions(request.lead_data.conversation_text);
+
+      if (dimensionInfo.hasMismatch && dimensionInfo.correctedValue) {
+        mathCorrection = {
+          flag: true,
+          correctedArea: dimensionInfo.correctedValue,
+          correctionMessage: generateCorrectionMessage(dimensionInfo),
+        };
+
+        // Update the request with corrected dimensions
+        request.lead_data.dimensions = {
+          value: dimensionInfo.correctedValue,
+          unit: 'sq_ft',
+        };
+
+        console.log(`[EstimateService] Math correction applied: ${dimensionInfo.statedArea} sqft → ${dimensionInfo.correctedValue} sqft`);
+      }
+    }
+
+    const systemPrompt = this.buildEstimateSystemPrompt(mathCorrection?.correctionMessage);
     const userPrompt = JSON.stringify(request, null, 2);
 
     try {
@@ -75,6 +101,12 @@ export class EstimateService {
         userPrompt,
         this.getEstimateSchema()
       );
+
+      // Add math correction flag to response if applicable
+      if (mathCorrection && response.quote) {
+        response.quote.math_correction_flag = true;
+        response.quote.corrected_area = mathCorrection.correctedArea;
+      }
 
       return response as EstimateResponse;
     } catch (error) {
@@ -132,9 +164,13 @@ export class EstimateService {
   /**
    * Build system prompt for estimate generation
    */
-  private buildEstimateSystemPrompt(): string {
-    return `You are a Senior Estimator for a home service business. Your goal is to provide a conservative, non-binding price range based ONLY on the provided pricing rules and lead data.
+  private buildEstimateSystemPrompt(mathCorrectionMessage?: string): string {
+    const mathCorrection = mathCorrectionMessage
+      ? `\n### MATH CORRECTION ALERT:\n${mathCorrectionMessage}\nYou MUST acknowledge this correction in your assistant_reply and use the corrected area for pricing.\n`
+      : '';
 
+    return `You are a Senior Estimator for a home service business. Your goal is to provide a conservative, non-binding price range based ONLY on the provided pricing rules and lead data.
+${mathCorrection}
 ### ARITHMETIC RULES:
 1. IDENTIFY: Match the 'service_type' to the 'pricing_rules'.
 2. CALCULATE BASE: Multiply the 'unit_value' by the 'min_rate' and 'max_rate'.
@@ -187,6 +223,7 @@ If dimensions are missing or invalid, return:
 
   /**
    * JSON schema for estimate response
+   * Note: math_correction_flag and corrected_area are added post-processing, not in schema
    */
   private getEstimateSchema() {
     return {

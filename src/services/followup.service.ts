@@ -94,7 +94,7 @@ export class FollowUpService {
   }
 
   /**
-   * Check if current time is within office hours (7 AM - 9 PM local time)
+   * Check if current time is within office hours (8 AM - 8 PM local time)
    */
   isOfficeHours(timezone: string = 'America/Chicago'): boolean {
     try {
@@ -106,7 +106,7 @@ export class FollowUpService {
       }).format(now);
 
       const hour = parseInt(localTime, 10);
-      return hour >= 7 && hour < 21; // 7 AM to 9 PM
+      return hour >= 8 && hour < 20; // 8 AM to 8 PM (20:00)
     } catch (error) {
       console.error('[FollowUpService] Timezone error:', error);
       return true; // Default to allowing if timezone check fails

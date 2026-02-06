@@ -1,0 +1,61 @@
+version: '3.8'
+
+# Development override for docker-compose.yml
+# Usage: docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
+
+services:
+  # ============================================
+  # Development App Configuration
+  # ============================================
+  app:
+    build:
+      target: builder  # Use builder stage for dev dependencies
+    volumes:
+      # Mount source code for hot-reloading
+      - ./src:/app/src:ro
+      - ./tsconfig.json:/app/tsconfig.json:ro
+      # Mount logs directory
+      - ./logs:/app/logs
+    command: npm run dev
+    environment:
+      NODE_ENV: development
+      LOG_LEVEL: debug
+    ports:
+      - "3000:3000"
+      # Expose debug port
+      - "9229:9229"
+
+  # ============================================
+  # PostgreSQL Development Configuration
+  # ============================================
+  postgres:
+    ports:
+      - "5432:5432"
+    volumes:
+      # Mount local data directory for persistence
+      - ./data/postgres:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: dev_password
+
+  # ============================================
+  # pgAdmin (Database GUI)
+  # ============================================
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: leads-quotes-pgadmin
+    restart: unless-stopped
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@local.dev
+      PGADMIN_DEFAULT_PASSWORD: admin
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    ports:
+      - "5050:80"
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    networks:
+      - app-network
+    depends_on:
+      - postgres
+
+volumes:
+  pgadmin_data:
