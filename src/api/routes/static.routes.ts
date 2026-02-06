@@ -78,4 +78,38 @@ router.get('/css/:filename', (req: Request, res: Response) => {
   res.sendFile(cssPath);
 });
 
+/**
+ * Serve robots.txt for SEO
+ */
+router.get('/robots.txt', (req: Request, res: Response) => {
+  const robotsPath = path.join(__dirname, '../../../public/robots.txt');
+
+  if (!fs.existsSync(robotsPath)) {
+    res.status(404).send('Not found');
+    return;
+  }
+
+  res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+  res.setHeader('Cache-Control', 'public, max-age=86400'); // 24 hours
+
+  res.sendFile(robotsPath);
+});
+
+/**
+ * Serve sitemap.xml for SEO
+ */
+router.get('/sitemap.xml', (req: Request, res: Response) => {
+  const sitemapPath = path.join(__dirname, '../../../public/sitemap.xml');
+
+  if (!fs.existsSync(sitemapPath)) {
+    res.status(404).send('Not found');
+    return;
+  }
+
+  res.setHeader('Content-Type', 'application/xml; charset=utf-8');
+  res.setHeader('Cache-Control', 'public, max-age=86400'); // 24 hours
+
+  res.sendFile(sitemapPath);
+});
+
 export default router;
