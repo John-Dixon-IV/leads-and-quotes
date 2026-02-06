@@ -21,18 +21,19 @@ export class LeadService {
     customer: Customer,
     request: WidgetMessageRequest
   ): Promise<WidgetMessageResponse> {
-    // 1. SECURITY: Check for prompt injection
-    const securityCheck = checkPromptInjection(request.message);
-    if (!securityCheck.passed) {
-      console.warn(`[Security] Blocked message: ${securityCheck.reason}`);
-      return this.buildSecurityBlockedResponse();
-    }
+    try {
+      // 1. SECURITY: Check for prompt injection
+      const securityCheck = checkPromptInjection(request.message);
+      if (!securityCheck.passed) {
+        console.warn(`[Security] Blocked message: ${securityCheck.reason}`);
+        return this.buildSecurityBlockedResponse();
+      }
 
-    // 2. Sanitize message
-    const sanitizedMessage = sanitizeMessage(request.message);
+      // 2. Sanitize message
+      const sanitizedMessage = sanitizeMessage(request.message);
 
-    // 3. Get or create lead for this session
-    const lead = await this.getOrCreateLead(customer, request);
+      // 3. Get or create lead for this session
+      const lead = await this.getOrCreateLead(customer, request);
 
     // 4. SECURITY: Multi-tenant validation
     if (!validateLeadOwnership(lead.customer_id, customer.customer_id)) {
@@ -211,15 +212,41 @@ export class LeadService {
     // 13. Increment message count for AI response
     await this.incrementMessageCount(lead.lead_id);
 
-    // 14. Build response
-    return {
-      lead_id: lead.lead_id,
-      classification: classificationResult.classification,
-      quote: quoteResult?.quote || null,
-      requires_followup: classificationResult.missing_info.length > 0,
-      reply_message: finalReplyMessage,
-      conversation_ended: conversationEnded,
-    };
+      // 14. Build response
+      return {
+        lead_id: lead.lead_id,
+        classification: classificationResult.classification,
+        quote: quoteResult?.quote || null,
+        requires_followup: classificationResult.missing_info.length > 0,
+        reply_message: finalReplyMessage,
+        conversation_ended: conversationEnded,
+      };
+    } catch (error) {
+      // Log error with context
+      console.error('[LeadService] Critical error in processMessage:', {
+        error: error instanceof Error ? error.message : 'Unknown error',
+        stack: error instanceof Error ? error.stack : undefined,
+        customerId: customer.customer_id,
+        sessionId: request.session_id,
+      });
+
+      // Return graceful fallback response
+      return {
+        lead_id: '',
+        classification: {
+          service_type: 'error',
+          category: 'System Error',
+          urgency_score: 0,
+          confidence: 0,
+          next_action: 'retry',
+        } as any,
+        quote: null,
+        requires_followup: false,
+        reply_message:
+          "I apologize, but I'm experiencing technical difficulties. Please try again in a moment, or feel free to call us directly if this is urgent.",
+        conversation_ended: false,
+      };
+    }
   }
 
   /**
