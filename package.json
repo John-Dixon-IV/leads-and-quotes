@@ -1,0 +1,41 @@
+{
+  "name": "leads-and-quotes",
+  "version": "1.0.0",
+  "description": "Multi-tenant embeddable AI chat widget for contractor lead capture",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "migrate": "node -r tsx/cjs src/db/migrations/run.ts",
+    "db:seed": "tsx src/scripts/seed-dev-data.ts",
+    "get-key": "tsx src/scripts/update-seed-with-key.ts",
+    "test:estimate": "tsx tests/estimate.test.ts",
+    "test:hot-lead": "tsx src/scripts/test-hot-lead.ts",
+    "test:digest": "tsx src/scripts/test-weekly-digest.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.32.1",
+    "express": "^4.18.2",
+    "express-session": "^1.17.3",
+    "pg": "^8.11.3",
+    "zod": "^3.22.4",
+    "dotenv": "^16.3.1",
+    "express-rate-limit": "^7.1.5",
+    "cors": "^2.8.5",
+    "node-cron": "^3.0.3"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/express-session": "^1.17.10",
+    "@types/node": "^20.10.6",
+    "@types/pg": "^8.10.9",
+    "@types/cors": "^2.8.17",
+    "@types/node-cron": "^3.0.11",
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.3"
+  }
+}

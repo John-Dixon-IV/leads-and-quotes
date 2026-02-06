@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Minimal Embed Example - LeadsAndQuotes Widget</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 600px;
+      margin: 100px auto;
+      padding: 20px;
+    }
+    h1 {
+      color: #333;
+    }
+    p {
+      color: #666;
+      line-height: 1.6;
+    }
+    .code {
+      background: #f4f4f4;
+      padding: 10px;
+      border-left: 3px solid #3b82f6;
+      margin: 20px 0;
+      font-family: monospace;
+      overflow-x: auto;
+    }
+  </style>
+</head>
+<body>
+  <h1>Widget Embed Example</h1>
+  <p>This is a minimal example showing how to embed the LeadsAndQuotes widget on any website.</p>
+
+  <div class="code">
+    &lt;script src="http://localhost:3000/widget.js?key=YOUR_API_KEY"&gt;&lt;/script&gt;
+  </div>
+
+  <p>Replace <code>YOUR_API_KEY</code> with your actual API key from the customer dashboard.</p>
+
+  <p>The widget will appear in the bottom-right corner of the page. Click it to start a conversation!</p>
+
+  <!--
+    IMPORTANT: Replace YOUR_API_KEY with the actual API key from your database
+    You can get this from running: npm run db:seed
+  -->
+  <script src="http://localhost:3000/widget.js?key=YOUR_API_KEY"></script>
+</body>
+</html>
