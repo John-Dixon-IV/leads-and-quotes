@@ -87,15 +87,20 @@ export class ClaudeService {
               content: userPrompt,
             },
           ],
-          response_format: {
-            type: 'json_schema',
-            json_schema: schema,
-          },
         });
 
         const content = response.content[0];
         if (content.type === 'text') {
-          return JSON.parse(content.text);
+          // Strip markdown code blocks if present
+          let jsonText = content.text.trim();
+          if (jsonText.startsWith('```')) {
+            // Remove ```json or ``` at start
+            jsonText = jsonText.replace(/^```(?:json)?\n?/, '');
+            // Remove ``` at end
+            jsonText = jsonText.replace(/\n?```$/, '');
+            jsonText = jsonText.trim();
+          }
+          return JSON.parse(jsonText);
         }
 
         throw new Error('Unexpected response format from Claude');
@@ -168,7 +173,17 @@ CRITICAL RULES:
 
     // Add current message
     prompt += `Current visitor message: ${request.currentMessage}\n\n`;
-    prompt += 'Analyze this message and respond appropriately.';
+    prompt += `Respond with a JSON object in this exact structure:
+{
+  "classification": {
+    "service_type": "string",
+    "urgency": "low" | "medium" | "high",
+    "confidence": 0.0 to 1.0
+  },
+  "reply_message": "string",
+  "is_qualified": boolean,
+  "missing_info": ["string"]
+}`;
 
     return prompt;
   }
@@ -211,7 +226,15 @@ CRITICAL RULES:
 
     prompt += `\nClassified service: ${request.classification.service_type}\n`;
     prompt += `Urgency: ${request.classification.urgency}\n\n`;
-    prompt += 'Generate a price estimate based on this information.';
+    prompt += `Respond with a JSON object in this exact structure:
+{
+  "quote": {
+    "estimate_low": number,
+    "estimate_high": number,
+    "factors": ["string"],
+    "next_steps": "string"
+  }
+}`;
 
     return prompt;
   }
