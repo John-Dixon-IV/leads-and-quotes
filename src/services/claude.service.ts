@@ -72,7 +72,7 @@ export class ClaudeService {
     model: string,
     systemPrompt: string,
     userPrompt: string,
-    schema: any,
+    _schema: any,
     retries: number = MAX_RETRIES
   ): Promise<any> {
     for (let attempt = 0; attempt <= retries; attempt++) {

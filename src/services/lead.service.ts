@@ -1,5 +1,6 @@
 import db from '../db/client';
 import claudeService from './claude.service';
+import groqService from './groq.service';
 import notificationService from './notification.service';
 import { Customer, Lead, Message } from '../types/domain.types';
 import { WidgetMessageRequest, WidgetMessageResponse } from '../types/api.types';
@@ -9,7 +10,7 @@ import {
   validateLeadOwnership,
 } from '../utils/security';
 
-const MAX_MESSAGES_PER_SESSION = 10;
+const MAX_MESSAGES_PER_SESSION = 50;
 const CONFIDENCE_THRESHOLD = 0.6;
 const HOT_LEAD_URGENCY_THRESHOLD = 0.8;
 
@@ -60,8 +61,9 @@ export class LeadService {
     // 9. Get conversation history
     const conversationHistory = await this.getConversationHistory(lead.lead_id);
 
-    // 10. Call Claude for classification (use sanitized message)
-    const classificationResult = await claudeService.classifyLead({
+    // 10. Call LLM for classification (Groq primary, Claude fallback)
+    let classificationResult;
+    const classificationParams = {
       customerContext: {
         services: customer.business_info.services || [],
         serviceArea: customer.business_info.service_area || 'Not specified',
@@ -74,7 +76,17 @@ export class LeadService {
         email: request.visitor?.email || lead.visitor_email || undefined,
         phone: request.visitor?.phone || lead.visitor_phone || undefined,
       },
-    });
+    };
+
+    try {
+      // Try Groq first (free tier - $0 cost)
+      console.log('[LeadService] Using Groq for lead classification');
+      classificationResult = await groqService.classifyLead(classificationParams);
+    } catch (groqError) {
+      // Fallback to Claude if Groq fails
+      console.warn('[LeadService] Groq failed, falling back to Claude:', groqError);
+      classificationResult = await claudeService.classifyLead(classificationParams);
+    }
 
     // 8. Check if Claude failed (confidence = 0.0)
     const claudeFailed = classificationResult.classification.confidence === 0.0;
@@ -185,6 +197,9 @@ export class LeadService {
         console.error('[LeadService] Quote generation failed:', error);
         await this.flagLeadNeedsReview(lead.lead_id);
         quoteResult = null;
+        // Reset to classification reply since quote failed
+        finalReplyMessage = classificationResult.reply_message;
+        conversationEnded = false;
       }
     } else {
       // Just update classification

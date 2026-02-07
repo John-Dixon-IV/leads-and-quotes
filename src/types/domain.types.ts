@@ -25,6 +25,15 @@ export interface BusinessInfo {
     phone?: string;
     email?: string;
   };
+  partner_referral_info?: {
+    company_name?: string;
+    contact_name?: string;
+    phone?: string;
+    email?: string;
+    website?: string;
+  };
+  color?: string;
+  logo_url?: string;
 }
 
 export interface PricingRules {
@@ -65,6 +74,10 @@ export interface Classification {
   service_type: string;
   urgency: 'low' | 'medium' | 'high';
   confidence: number;
+  is_out_of_area?: boolean;
+  next_action?: string;
+  category?: string;
+  urgency_score?: number;
 }
 
 export interface Quote {

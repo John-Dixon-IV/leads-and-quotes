@@ -23,6 +23,10 @@ export interface ClaudeClassificationResponse {
     service_type: string;
     urgency: 'low' | 'medium' | 'high';
     confidence: number;
+    is_out_of_area?: boolean;
+    next_action?: string;
+    category?: string;
+    urgency_score?: number;
   };
   reply_message: string;
   is_qualified: boolean;
